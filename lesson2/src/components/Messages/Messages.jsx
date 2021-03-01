@@ -60,8 +60,8 @@ class Messages extends Component {
     }
 }
 
-const Message = (props) => {
+/* const Message = (props) => {
     return <div className='my-class'>{props.item.nick}: {props.item.value}</div>
-};
+}; */
 
 export {Messages};
