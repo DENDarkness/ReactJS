@@ -1,8 +1,13 @@
 import {Component} from 'react';
+import './message.css'
 
 class Message extends Component {
     render() {
-        return(<div className='my-class'>{this.props.item.nick}: {this.props.item.value}</div>);
+        return(
+            <div className='message'>
+                {this.props.item.nick}: {this.props.item.value}
+            </div>
+            );
     }
 }
 

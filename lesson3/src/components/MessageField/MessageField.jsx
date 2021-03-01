@@ -1,6 +1,7 @@
 import {Component, createRef, Fragment} from 'react';
 import {Message} from '../Message';
 import TextField from '@material-ui/core/TextField';
+import './message-field.css'
 
 
 class MessageField extends Component {
@@ -58,11 +59,11 @@ class MessageField extends Component {
 
         return (
             <Fragment>
-                <div className='messages'>
+                <div className='message-field'>
                 {msg.map((item, index) => (
                         <Message key={index} item={item} />
                     ))}
-                <TextField id="standard-basic" label="Введи текст сообщения" onKeyDown={this.keyPress} onChange={this.handleChange} value={this.state.message} />
+                <TextField id="standard-basic" label="Введи текст сообщения" onKeyDown={this.keyPress} onChange={this.handleChange} value={this.state.message} className="message-field-text" />
                 </div>
 
 {/*                 <button onClick={this.addMessage}>Send Message</button>
