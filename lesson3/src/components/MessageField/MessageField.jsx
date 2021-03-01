@@ -60,11 +60,17 @@ class MessageField extends Component {
         return (
             <Fragment>
                 <div className='message-field'>
-                {msg.map((item, index) => (
-                        <Message key={index} item={item} />
-                    ))}
-                <TextField id="standard-basic" label="Введи текст сообщения" onKeyDown={this.keyPress} onChange={this.handleChange} value={this.state.message} className="message-field-text" />
+                    <div className='message-field__text'>
+                        {msg.map((item, index) => (
+                            <Message key={index} item={item} />
+                        ))}
+                    </div>
+                <div className="message-field__input">
+                    <TextField id="standard-basic" label="Введи текст сообщения" onKeyDown={this.keyPress} onChange={this.handleChange} value={this.state.message}  className="message-field__input_text" />
                 </div>
+
+                </div>
+
 
 {/*                 <button onClick={this.addMessage}>Send Message</button>
  */}

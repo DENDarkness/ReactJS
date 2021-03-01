@@ -1,7 +1,8 @@
-.message-field-text {
+.message-field__input_text {
     width: 500px;
+    background-color: wheat;
 }
 
-.message-field {
-    border: 5px;
+.message-field__input {
+    padding-top: 25px;
 }
