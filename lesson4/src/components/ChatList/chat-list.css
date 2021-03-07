@@ -1,0 +1,11 @@
+.chat-list {
+    float: left;
+    width: 31%;
+    border-right: 2px solid #E9EBED;
+    padding-bottom: 10px;
+}
+
+.chat-list__list {
+    height: 35px;
+    ;
+}

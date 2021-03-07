@@ -4,5 +4,5 @@
 }
 
 .message-field__input {
-    padding-top: 25px;
+    width: 100%
 }
