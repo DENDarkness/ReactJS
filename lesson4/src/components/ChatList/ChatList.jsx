@@ -49,7 +49,7 @@ class ChatList extends Component {
                             if (event.key === 'Enter') {
                                 this.addChat();
                             }
-                        }}
+                        }} bb
                     />
                 <Button color='primary' variant='contained'onClick={this.addChat}>Добавить чат</Button>
             </div>
