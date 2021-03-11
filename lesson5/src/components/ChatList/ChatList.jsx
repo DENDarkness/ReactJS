@@ -32,7 +32,8 @@ class _ChatList extends Component {
     };
 
     render() {
-        console.log(this.props)
+        const chats = this.props;
+        console.log(this.props.chats)
         return (
             <div className='chat-list'>
                 <List>
@@ -69,7 +70,7 @@ class _ChatList extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    chats: state.chats,
+    chats: state.chat.chats,
 });
 
 const mapDispatchToProps = (dispatch) => 
