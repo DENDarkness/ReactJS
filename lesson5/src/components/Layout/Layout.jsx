@@ -21,7 +21,6 @@ class _Layout extends Component {
         return (
             <div className="layout">
                     < ChatList />
-                    {/* < MessageField currentChat={match.params.chatId}/> */}
                     < MessageField currentChat={match.params.chatId}/>
             </div>
         );

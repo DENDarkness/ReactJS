@@ -21,9 +21,9 @@ import { store } from './redux/store';
  */
 ReactDOM.render( 
     <BrowserRouter >
-    <ReduxProvider store={store}>
-    <App />
-    </ReduxProvider>
+    <ReduxProvider store = { store } >
+    <App / >
+    </ReduxProvider> 
     </BrowserRouter>,
     document.querySelector('#root')
 );

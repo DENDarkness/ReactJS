@@ -2,10 +2,10 @@ import {Component, createRef, Fragment} from 'react';
 import {Message} from '../Message';
 import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
+import {sendMessage} from '../../redux/actions/messageActions';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import './message-field.css'
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { sendMessage } from '../../redux/actions/messageActions';
 
 
 class _MessageField extends Component {
@@ -18,14 +18,13 @@ class _MessageField extends Component {
 
     state = {
         textField: '',
+        msgBoot: ['Welcome to chat', 'I am just robot', 'Good communication'], 
     };
 
     addMessage = () => {
         const chatId = this.props.currentChat;
-
-//        const newMessage = msg.length ? msg : this.state.textMessage;
-//        const currentAuthor = author.length ? author : 'me';
-
+        //const prevMessages = this.state.messages[chatId] || [];
+        this.state.textField && this.props.sendMessage('1', this.state.textField, 'den', chatId);
         this.setState({textField: ''});
     }
 
@@ -47,14 +46,16 @@ class _MessageField extends Component {
                 this.props.messages[chatId]?.length % 2 === 1
             ) {
             setTimeout(()=> {
-                this.setState({
+                this.props.sendMessage('0', this.state.msgBoot[rand], 'bot', chatId);
+/*                 this.setState({
+                    
                     messages: {
                         ...this.state.messages,
                         [chatId]: 
                             [...this.state.messages[chatId], 
                             {id: 0, nick: 'bot', text: this.state.msgBoot[rand]}
                         ],
-                    }}) 
+                    }})  */
             }, 1000);
         }
         // Скрол всегда внизу
@@ -69,15 +70,16 @@ class _MessageField extends Component {
     }
 
     render() {
-        const { messages = []} = this.state;
-        const chatId = this.props.currentChat;
+        console.log(this.props)
+        const { messages = {}, currentChat: chatId } = this.props;
+//        const chatId = this.props.currentChat;
 //        this.handleChange = this.handleChange.bind(this);
         
 
         return (
                 <div className='message-field'>
                     {
-                        chatId && (
+                        this.props.currentChat && (
                             <Fragment>
                         <div className='messages' ref={this.fieldRef}>
                             {messages[chatId] && 
@@ -108,15 +110,16 @@ class _MessageField extends Component {
     }
 }
 
+/* const Message = (props) => {
+    return <div className='my-class'>{props.item.nick}: {props.item.value}</div>
+}; */
 const mapStateToProps = (state) => ({
     messages: state.chat.messages,
 });
 
-// const mapDispatchToProps = (dispatch) =>
-//     bindActionCreators({ sendMessage }, dispatch);
+const mapDispatchToProps = (dispatch) => 
+    bindActionCreators({sendMessage}, dispatch);
 
-const MessageField = compose(
-    connect(mapStateToProps, { sendMessage })
-)(_MessageField);
+const MessageField = connect(mapStateToProps, mapDispatchToProps)(_MessageField);
 
 export {MessageField};
