@@ -3,29 +3,40 @@ import {Link} from 'react-router-dom';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import { TextField } from '@material-ui/core';
+import {addChat} from '../../redux/actions/chatActions';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import Button from '@material-ui/core/Button';
 import './chat-list.css';
 import { Layout } from '../Layout';
 
-class ChatList extends Component {
+class _ChatList extends Component {
+
+    static propTypes = {
+        chats: PropTypes.array,
+        addChat: PropTypes.func.isRequired,
+    };
 
     state = {
-        chats: ['chat 1', 'chat 2', 'chat 3'],
+//        chats: ['chat 1', 'chat 2', 'chat 3'],
         chatName: '',
     };
 
     addChat = () => {
+        this.props.addChat(this.state.chatName);
         this.setState({
-            chats: [...this.state.chats, this.state.chatName],
+//            chats: [...this.state.chats, this.state.chatName],
             chatName: '',
         });
     };
 
     render() {
+        console.log(this.props)
         return (
             <div className='chat-list'>
                 <List>
-                    {this.state.chats.map((chat, index) =>(
+                    {this.props.chats.map((chat, index) =>(
                         <Link key={index} to={`/chat/${index}`}>
                                 <ListItem button>
                                     <div className='chat-list__list'>
@@ -56,5 +67,14 @@ class ChatList extends Component {
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+    chats: state.chats,
+});
+
+const mapDispatchToProps = (dispatch) => 
+    bindActionCreators({addChat}, dispatch);
+
+const ChatList = connect(mapStateToProps, mapDispatchToProps)(_ChatList);
 
 export { ChatList };

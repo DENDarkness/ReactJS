@@ -23,7 +23,7 @@ class _MessageField extends Component {
 
     addMessage = () => {
         const chatId = this.props.currentChat;
-        //const prevMessages = this.state.messages[chatId] || [];
+
         this.state.textField && this.props.sendMessage('1', this.state.textField, 'den', chatId);
         this.setState({textField: ''});
     }
@@ -47,15 +47,6 @@ class _MessageField extends Component {
             ) {
             setTimeout(()=> {
                 this.props.sendMessage('0', this.state.msgBoot[rand], 'bot', chatId);
-/*                 this.setState({
-                    
-                    messages: {
-                        ...this.state.messages,
-                        [chatId]: 
-                            [...this.state.messages[chatId], 
-                            {id: 0, nick: 'bot', text: this.state.msgBoot[rand]}
-                        ],
-                    }})  */
             }, 1000);
         }
         // Скрол всегда внизу
@@ -70,11 +61,7 @@ class _MessageField extends Component {
     }
 
     render() {
-        console.log(this.props)
         const { messages = {}, currentChat: chatId } = this.props;
-//        const chatId = this.props.currentChat;
-//        this.handleChange = this.handleChange.bind(this);
-        
 
         return (
                 <div className='message-field'>
@@ -110,9 +97,6 @@ class _MessageField extends Component {
     }
 }
 
-/* const Message = (props) => {
-    return <div className='my-class'>{props.item.nick}: {props.item.value}</div>
-}; */
 const mapStateToProps = (state) => ({
     messages: state.chat.messages,
 });
