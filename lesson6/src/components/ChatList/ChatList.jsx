@@ -12,6 +12,9 @@ import {bindActionCreators} from 'redux';
 import IconButton from '@material-ui/core/IconButton';
 import Add from '@material-ui/icons/Add';
 import Avatar from '@material-ui/core/Avatar';
+import MailIcon from '@material-ui/icons/Mail';
+import DeleteIcon from '@material-ui/icons/Delete';
+import {readMessages} from '../../redux/actions/readMessages';
 import './chat-list.css';
 import { Layout } from '../Layout';
 
@@ -21,6 +24,8 @@ class _ChatList extends Component {
         chats: PropTypes.array,
         messages: PropTypes.object.isRequired,
         addChat: PropTypes.func.isRequired,
+        router: PropTypes.object.isRequired,
+        readMessages: PropTypes.func.isRequired,
     };
 
     state = {
@@ -31,11 +36,18 @@ class _ChatList extends Component {
     addChat = () => {
         this.props.addChat(this.state.chatName);
 
-
         this.setState({
-//            chats: [...this.state.chats, this.state.chatName],
             chatName: '',
         });
+    };
+
+    readMessage = (chatName) => {
+        this.props.chats.map(chat => {
+            if (chatName === chat.chatName) {
+                chat.status = false;
+            }
+        })
+    
     };
 
     render() {
@@ -43,18 +55,37 @@ class _ChatList extends Component {
         return (
             <div className='chat-list'>
                 <List>
-                        {this.props.chats.map((chat, index) =>(
-                            <Link key={index} to={`/chat/${index}`}>
-                                    <ListItem button>
-                                        <Avatar alt="Remy Sharp" src={'https://i.pravatar.cc/300'} />
-                                        <div className='chat-list__list'>
-                                            <div className='chat-name'>
-                                                <ListItemText primary={chat.chatName} />                                                    
+                        {this.props.chats.map((chat, index) => {
+                            if (chat.status) {
+                                return (
+                                    <Link key={index} to={`/chat/${index}`}>
+                                        <ListItem button onClick={() => this.props.readMessages(chat.chatName)}>
+                                            <Avatar alt="Remy Sharp" src={'https://i.pravatar.cc/300'} />
+                                            <div className='chat-list__list'>
+                                                <div className='chat-name'>
+                                                    <ListItemText primary={chat.chatName} />                                                    
+                                                </div>
                                             </div>
-                                        </div>
-                                    </ListItem>
-                            </Link>                       
-                        ))}
+                                            <MailIcon/> 
+                                        </ListItem>
+                                    </Link>   
+                                ) 
+                            } else {
+                                return (
+                                    <Link key={index} to={`/chat/${index}`}>
+                                        <ListItem button onClick={() => this.props.readMessages(chat.chatName)} >
+                                            <Avatar alt="Remy Sharp" src={'https://i.pravatar.cc/300'} />
+                                            <div className='chat-list__list'>
+                                                <div className='chat-name'>
+                                                    <ListItemText primary={chat.chatName} />                                                    
+                                                </div>
+                                            </div>
+                                        </ListItem>
+                                    </Link>   
+                                )  
+                            }
+                        })
+                        }
                 </List>
                 <div className='new-chat'>
                     <div className='new-chat-textfield'>
@@ -89,11 +120,12 @@ class _ChatList extends Component {
 const mapStateToProps = (state) => ({
     chats: state.chat.chats,
     messages: state.chat.messages,
+    router: state.router.location,
 });
 
-const mapDispatchToProps = (dispatch) => 
-    bindActionCreators({addChat}, dispatch);
+/* const mapDispatchToProps = (dispatch) => 
+    bindActionCreators({addChat}, dispatch); */
 
-const ChatList = connect(mapStateToProps, mapDispatchToProps)(_ChatList);
+const ChatList = connect(mapStateToProps, {addChat, readMessages})(_ChatList);
 
 export { ChatList };
