@@ -10,7 +10,7 @@ class Profile extends Component {
     render() {
 //        const large = useSizedIconButtonStyles({ padding: 8, childSize: 48 });
         return (
-                <div id="profile" className="profile">
+                <div className="profile1">
                     <div className="profile-avatar">
                         <IconButton className="profile-icon">
                             <Avatar src={'https://i.pravatar.cc/300'} to={`/profile`}/>

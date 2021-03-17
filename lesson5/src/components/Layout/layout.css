@@ -1,11 +1,9 @@
 .layout {
-    /*     margin: 0 auto;
-    width: 500px;
- */
     display: flex;
     background-color: #fff;
     max-width: 1010px;
     min-width: 1010px;
+    min-height: 555px;
     margin: 0 auto;
     box-shadow: 0px 1px 0 #dfe5ec;
     border-radius: 0 0 3px 3px;

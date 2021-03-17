@@ -2,12 +2,15 @@ import { Component } from 'react';
 import {Link} from 'react-router-dom';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import { TextField } from '@material-ui/core';
 import {addChat} from '../../redux/actions/chatActions';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
 import './chat-list.css';
 import { Layout } from '../Layout';
 
@@ -15,6 +18,7 @@ class _ChatList extends Component {
 
     static propTypes = {
         chats: PropTypes.array,
+        messages: PropTypes.object.isRequired,
         addChat: PropTypes.func.isRequired,
     };
 
@@ -25,29 +29,34 @@ class _ChatList extends Component {
 
     addChat = () => {
         this.props.addChat(this.state.chatName);
+
+
         this.setState({
 //            chats: [...this.state.chats, this.state.chatName],
             chatName: '',
         });
+        console.log(this.props)
     };
 
     render() {
         const chats = this.props;
-        console.log(this.props.chats)
         return (
             <div className='chat-list'>
                 <List>
-                    {this.props.chats.map((chat, index) =>(
-                        <Link key={index} to={`/chat/${index}`}>
-                                <ListItem button>
-                                    <div className='chat-list__list'>
-                                        <li className=''>
-                                            {chat}
-                                        </li>
-                                    </div>
-                                </ListItem>
-                        </Link>                       
-                    ))}
+                        {this.props.chats.map((chat, index) =>(
+                            <Link key={index} to={`/chat/${index}`}>
+                                    <ListItem button>
+                                        {/* <ArrowRightIcon /> */}
+                                        <Avatar alt="Remy Sharp" src={'https://i.pravatar.cc/300'} />
+                                        <div className='chat-list__list'>
+                                                <div className='chat-name'>
+                                                <ListItemText primary={chat} />
+                                                    
+                                                </div>
+                                        </div>
+                                    </ListItem>
+                            </Link>                       
+                        ))}
                 </List>
                 <div className='new-chat'>
                     <TextField value={this.state.chatName}
@@ -71,6 +80,7 @@ class _ChatList extends Component {
 
 const mapStateToProps = (state) => ({
     chats: state.chat.chats,
+    messages: state.chat.messages,
 });
 
 const mapDispatchToProps = (dispatch) => 

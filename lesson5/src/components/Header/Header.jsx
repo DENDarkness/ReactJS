@@ -11,8 +11,8 @@ class Header extends Component {
         return (
             <div className='header'>
                 <div className="header-name">
-                    <Link to={`/`}>
-                        <h3>My Messager</h3>
+                    <Link to={`/`}> 
+                        <span>MESSAGER</span>
                     </Link>
                 </div>
                 <div className="profile">
