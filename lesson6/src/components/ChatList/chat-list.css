@@ -1,0 +1,35 @@
+.chat-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 2px solid #E9EBED;
+    width: 30%;
+    overflow-y: auto;
+}
+
+.chat-list a {
+    color: black;
+    text-decoration: none;
+}
+
+.chat-list__list {
+    display: flex;
+    height: 35px;
+    padding-left: 10px;
+}
+
+.chat-name {
+    display: flex;
+    margin-left: 10px;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+}
+
+.new-chat {
+    display: flex;
+}
+
+.new-chat-button {
+    margin-left: 13px;
+}
