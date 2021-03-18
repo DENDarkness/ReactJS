@@ -37,3 +37,11 @@
 .button-chat {
     display: flex;
 }
+
+.button-chat:hover .remove-chat {
+    display: block;
+}
+
+.remove-chat {
+    display: none;
+}

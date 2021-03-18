@@ -17,6 +17,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import {readMessages} from '../../redux/actions/readMessages';
 import {removeChat} from '../../redux/actions/removeChat';
 import ClearIcon from '@material-ui/icons/Clear';
+import Badge from '@material-ui/core/Badge';
 import './chat-list.css';
 import { Layout } from '../Layout';
 
@@ -32,7 +33,6 @@ class _ChatList extends Component {
     };
 
     state = {
-//        chats: ['chat 1', 'chat 2', 'chat 3'],
         chatName: '',
     };
 
@@ -62,7 +62,9 @@ class _ChatList extends Component {
                                                         <ListItemText primary={chat.chatName} />                                                    
                                                     </div>
                                                 </div>
-                                                <MailIcon/> 
+                                                <Badge badgeContent={1} color="primary">
+                                                    <MailIcon />
+                                                </Badge>
                                             </ListItem>
                                         </div>
                                     </Link>   
@@ -79,7 +81,9 @@ class _ChatList extends Component {
                                                     </div>
                                                 </div>
                                             </ListItem>
-                                            <ClearIcon onClick={() => this.props.removeChat(chat.chatName)}/>
+                                            <div className='remove-chat'>
+                                                <ClearIcon onClick={() => this.props.removeChat(chat.chatName)}/>   
+                                            </div>
                                         </div>
                                     </Link>   
                                 )  
