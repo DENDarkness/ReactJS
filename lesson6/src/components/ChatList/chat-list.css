@@ -33,3 +33,7 @@
 .new-chat-button {
     margin-left: 13px;
 }
+
+.button-chat {
+    display: flex;
+}

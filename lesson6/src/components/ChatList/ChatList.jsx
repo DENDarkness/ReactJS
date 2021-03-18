@@ -15,6 +15,8 @@ import Avatar from '@material-ui/core/Avatar';
 import MailIcon from '@material-ui/icons/Mail';
 import DeleteIcon from '@material-ui/icons/Delete';
 import {readMessages} from '../../redux/actions/readMessages';
+import {removeChat} from '../../redux/actions/removeChat';
+import ClearIcon from '@material-ui/icons/Clear';
 import './chat-list.css';
 import { Layout } from '../Layout';
 
@@ -26,6 +28,7 @@ class _ChatList extends Component {
         addChat: PropTypes.func.isRequired,
         router: PropTypes.object.isRequired,
         readMessages: PropTypes.func.isRequired,
+        removeChat: PropTypes.func.isRequired,
     };
 
     state = {
@@ -41,14 +44,6 @@ class _ChatList extends Component {
         });
     };
 
-    readMessage = (chatName) => {
-        this.props.chats.map(chat => {
-            if (chatName === chat.chatName) {
-                chat.status = false;
-            }
-        })
-    
-    };
 
     render() {
         const chats = this.props;
@@ -59,28 +54,33 @@ class _ChatList extends Component {
                             if (chat.status) {
                                 return (
                                     <Link key={index} to={`/chat/${index}`}>
-                                        <ListItem button onClick={() => this.props.readMessages(chat.chatName)}>
-                                            <Avatar alt="Remy Sharp" src={'https://i.pravatar.cc/300'} />
-                                            <div className='chat-list__list'>
-                                                <div className='chat-name'>
-                                                    <ListItemText primary={chat.chatName} />                                                    
+                                        <div className='button-chat'>
+                                            <ListItem button onClick={() => this.props.readMessages(chat.chatName)}>
+                                                <Avatar alt="Remy Sharp" src={'https://i.pravatar.cc/300'} />
+                                                <div className='chat-list__list'>
+                                                    <div className='chat-name'>
+                                                        <ListItemText primary={chat.chatName} />                                                    
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <MailIcon/> 
-                                        </ListItem>
+                                                <MailIcon/> 
+                                            </ListItem>
+                                        </div>
                                     </Link>   
                                 ) 
                             } else {
                                 return (
                                     <Link key={index} to={`/chat/${index}`}>
-                                        <ListItem button onClick={() => this.props.readMessages(chat.chatName)} >
-                                            <Avatar alt="Remy Sharp" src={'https://i.pravatar.cc/300'} />
-                                            <div className='chat-list__list'>
-                                                <div className='chat-name'>
-                                                    <ListItemText primary={chat.chatName} />                                                    
+                                        <div className='button-chat'>
+                                            <ListItem button onClick={() => this.props.readMessages(chat.chatName)}>
+                                                <Avatar alt="Remy Sharp" src={'https://i.pravatar.cc/300'} />
+                                                <div className='chat-list__list'>
+                                                    <div className='chat-name'>
+                                                        <ListItemText primary={chat.chatName} />                                                    
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </ListItem>
+                                            </ListItem>
+                                            <ClearIcon onClick={() => this.props.removeChat(chat.chatName)}/>
+                                        </div>
                                     </Link>   
                                 )  
                             }
@@ -126,6 +126,6 @@ const mapStateToProps = (state) => ({
 /* const mapDispatchToProps = (dispatch) => 
     bindActionCreators({addChat}, dispatch); */
 
-const ChatList = connect(mapStateToProps, {addChat, readMessages})(_ChatList);
+const ChatList = connect(mapStateToProps, {addChat, readMessages, removeChat})(_ChatList);
 
 export { ChatList };

@@ -2,6 +2,7 @@ import { SEND_MESSAGE } from '../actions/messageActions'
 import { ADD_CHAT } from '../actions/chatActions'
 import { UNREAD_MESSAGES } from '../actions/unreadMessages'
 import { READ_MESSAGES } from '../actions/readMessages'
+import { REMOVE_CHAT } from '../actions/removeChat'
 
 const initialState = {
     /*     chats: [{
@@ -67,6 +68,11 @@ export const chatReducer = (state = initialState, action) => {
                         }
                     ]
                     //                chats: [...state.chats, action.payload.chatName]
+            };
+        case REMOVE_CHAT:
+            return {
+                ...state,
+                chats: state.chats.filter((chat) => chat.chatName !== action.payload.chatName)
             };
         case UNREAD_MESSAGES:
             return {
