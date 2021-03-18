@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
 import {sendMessage} from '../../redux/actions/messageActions';
 import {connect} from 'react-redux';
+
 import {bindActionCreators} from 'redux';
 import './message-field.css'
 

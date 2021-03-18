@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {ChatList} from '../ChatList';
 import BorderColorIcon from '@material-ui/icons/BorderColor';
+import { push } from 'connected-react-router';
 import TextField from '@material-ui/core/TextField';
 import './profile.css';
 
@@ -17,6 +18,7 @@ class _Profile extends Component {
     static propTypes = {
         profile: PropTypes.object.isRequired,
         changeFirstname: PropTypes.func.isRequired,
+        push: PropTypes.func.isRequired,
     };
 
     state = {
@@ -84,10 +86,10 @@ const mapStateToProps = (state) => ({
     profile: state.profile.profile,
 });
 
-const mapDispatchToProps = (dispatch) => 
-    bindActionCreators({changeFirstname}, dispatch);
+/* const mapDispatchToProps = (dispatch) => 
+    bindActionCreators({changeFirstname}, dispatch); */
 
-const Profile = connect(mapStateToProps, mapDispatchToProps)(_Profile);
+const Profile = connect(mapStateToProps, {changeFirstname, push})(_Profile);
 
 
 
