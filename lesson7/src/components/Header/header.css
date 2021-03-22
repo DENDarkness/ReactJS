@@ -1,0 +1,29 @@
+.header {
+    display: flex;
+    max-width: 1010px;
+    margin: 0 auto;
+    height: 70px;
+    background: #5682a3;
+    justify-content: space-between;
+}
+
+.header-name {
+    display: flex;
+    width: 31%;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-name a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 10px;
+}

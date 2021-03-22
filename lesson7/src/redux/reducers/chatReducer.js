@@ -1,8 +1,9 @@
-import { SEND_MESSAGE, } from '../actions/messageActions'
+import { SEND_MESSAGE, START_MESSAGES_LOADING, SUCCESS_MESSAGES_LOADING, ERROR_MESSAGES_LOADING } from '../actions/messageActions'
 import { ADD_CHAT } from '../actions/chatActions'
 import { UNREAD_MESSAGES } from '../actions/unreadMessages'
 import { READ_MESSAGES } from '../actions/readMessages'
 import { REMOVE_CHAT } from '../actions/removeChat'
+import { store } from '../store'
 
 const initialState = {
     /*     chats: [{
@@ -19,10 +20,11 @@ const initialState = {
             messagesList: []
         }], */
     messages: {
-        0: [],
-        1: [],
-        2: [],
+        // 0: [],
+        // 1: [],
+        // 2: [],
     },
+    isLoading: false,
     chats: [{
         chatId: 0,
         chatName: 'Друзья',
@@ -102,6 +104,29 @@ export const chatReducer = (state = initialState, action) => {
                 })
 
             };
+        case START_MESSAGES_LOADING:
+            {
+                return {
+                    ...store,
+                    isLoading: true,
+                }
+            }
+        case ERROR_MESSAGES_LOADING:
+            {
+                return {
+                    ...state,
+                    isLoading: false,
+                }
+            }
+        case SUCCESS_MESSAGES_LOADING:
+            {
+                console.log(action.payload);
+                return {
+                    ...state,
+                    isLoading: false,
+                    //messages: action.payload
+                }
+            }
         default:
             return state;
     }
