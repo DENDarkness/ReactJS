@@ -1,0 +1,10 @@
+.profile1 {
+    float: left;
+    width: 69%;
+}
+
+.profile-avatar {}
+
+.profile-firstname {
+    display: flex;
+}

@@ -1,0 +1,8 @@
+.message-field__input_text {
+    width: 500px;
+    background-color: wheat;
+}
+
+.message-field__input {
+    width: 100%
+}

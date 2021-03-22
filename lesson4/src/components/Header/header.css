@@ -1,0 +1,12 @@
+.header {
+    max-width: 1010px;
+    margin: 0 auto;
+    height: 70px;
+    background: #5682a3;
+}
+
+.header-name {
+    float: left;
+    width: 880px;
+    margin-left: 50px;
+}
