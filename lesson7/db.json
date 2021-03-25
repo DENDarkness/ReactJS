@@ -1,0 +1,27 @@
+{
+    "messages": {
+        "0": [
+            { "id": "1", "nick": "den", "text": "Hello!" }
+        ],
+        "1": [
+            { "id": "1", "nick": "den", "text": "Hello!" }
+        ],
+        "2": [
+            { "id": "1", "nick": "den", "text": "Hello!" }
+        ]
+    },
+
+    "chats": [{
+        "chatId": 0,
+        "chatName": "Друзья",
+        "status": false
+    }, {
+        "chatId": 1,
+        "chatName": "Семья",
+        "status": false
+    }, {
+        "chatId": 2,
+        "chatName": "Игровой",
+        "status": false
+    }]
+}
