@@ -1,7 +1,13 @@
 {
     "messages": {
-        "0": [],
-        "1": [],
-        "2": []
+        "0": [
+            { "id": "1", "nick": "den", "text": "Hello!" }
+        ],
+        "1": [
+            { "id": "1", "nick": "den", "text": "Hello!" }
+        ],
+        "2": [
+            { "id": "1", "nick": "den", "text": "Hello!" }
+        ]
     }
 }

@@ -20,9 +20,9 @@ const initialState = {
             messagesList: []
         }], */
     messages: {
-        // 0: [],
-        // 1: [],
-        // 2: [],
+        /*         0: [],
+                1: [],
+                2: [], */
     },
     isLoading: false,
     chats: [{
@@ -107,7 +107,7 @@ export const chatReducer = (state = initialState, action) => {
         case START_MESSAGES_LOADING:
             {
                 return {
-                    ...store,
+                    ...state,
                     isLoading: true,
                 }
             }
@@ -124,7 +124,7 @@ export const chatReducer = (state = initialState, action) => {
                 return {
                     ...state,
                     isLoading: false,
-                    //messages: action.payload
+                    messages: action.payload
                 }
             }
         default:
