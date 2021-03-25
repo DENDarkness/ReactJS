@@ -1,8 +1,9 @@
-import { SEND_MESSAGE, } from '../actions/messageActions'
-import { ADD_CHAT } from '../actions/chatActions'
+import { SEND_MESSAGE, START_MESSAGES_LOADING, SUCCESS_MESSAGES_LOADING, ERROR_MESSAGES_LOADING } from '../actions/messageActions'
+import { ADD_CHAT, START_CHATS_LOADING, SUCCESS_CHATS_LOADING, ERROR_CHATS_LOADING } from '../actions/chatActions'
 import { UNREAD_MESSAGES } from '../actions/unreadMessages'
 import { READ_MESSAGES } from '../actions/readMessages'
 import { REMOVE_CHAT } from '../actions/removeChat'
+import { store } from '../store'
 
 const initialState = {
     /*     chats: [{
@@ -19,23 +20,26 @@ const initialState = {
             messagesList: []
         }], */
     messages: {
-        0: [],
-        1: [],
-        2: [],
+        /*         0: [],
+                1: [],
+                2: [], */
     },
-    chats: [{
-        chatId: 0,
-        chatName: 'Друзья',
-        status: false
-    }, {
-        chatId: 1,
-        chatName: 'Семья',
-        status: false
-    }, {
-        chatId: 2,
-        chatName: 'Игровой',
-        status: false
-    }],
+    isLoading: false,
+    chats: [
+        /* {
+                chatId: 0,
+                chatName: 'Друзья',
+                status: false
+            }, {
+                chatId: 1,
+                chatName: 'Семья',
+                status: false
+            }, {
+                chatId: 2,
+                chatName: 'Игровой',
+                status: false
+            } */
+    ],
 };
 
 export const chatReducer = (state = initialState, action) => {
@@ -102,6 +106,52 @@ export const chatReducer = (state = initialState, action) => {
                 })
 
             };
+        case START_MESSAGES_LOADING:
+            {
+                return {
+                    ...state,
+                    isLoading: true,
+                }
+            }
+        case ERROR_MESSAGES_LOADING:
+            {
+                return {
+                    ...state,
+                    isLoading: false,
+                }
+            }
+        case SUCCESS_MESSAGES_LOADING:
+            {
+                console.log(action.payload);
+                return {
+                    ...state,
+                    isLoading: false,
+                    messages: action.payload
+                }
+            }
+        case START_CHATS_LOADING:
+            {
+                return {
+                    ...state,
+                    isLoading: true,
+                }
+            }
+        case ERROR_CHATS_LOADING:
+            {
+                return {
+                    ...state,
+                    isLoading: false,
+                }
+            }
+        case SUCCESS_CHATS_LOADING:
+            {
+                console.log(action.payload);
+                return {
+                    ...state,
+                    isLoading: false,
+                    chats: action.payload
+                }
+            }
         default:
             return state;
     }
