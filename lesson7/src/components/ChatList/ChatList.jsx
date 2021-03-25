@@ -5,7 +5,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import { TextField } from '@material-ui/core';
-import {addChat} from '../../redux/actions/chatActions';
+import {addChat, loadChats} from '../../redux/actions/chatActions';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -30,11 +30,16 @@ class _ChatList extends Component {
         router: PropTypes.object.isRequired,
         readMessages: PropTypes.func.isRequired,
         removeChat: PropTypes.func.isRequired,
+        loadChats: PropTypes.func.isRequired,
     };
 
     state = {
         chatName: '',
     };
+
+    componentDidMount() {
+        this.props.loadChats();
+    }
 
     addChat = () => {
         this.props.addChat(this.state.chatName);
@@ -130,6 +135,6 @@ const mapStateToProps = (state) => ({
 /* const mapDispatchToProps = (dispatch) => 
     bindActionCreators({addChat}, dispatch); */
 
-const ChatList = connect(mapStateToProps, {addChat, readMessages, removeChat})(_ChatList);
+const ChatList = connect(mapStateToProps, {addChat, readMessages, removeChat, loadChats})(_ChatList);
 
 export { ChatList };
